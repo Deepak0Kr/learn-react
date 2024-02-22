@@ -1,11 +1,13 @@
 
-import { useState ,useCallback} from 'react'
+import { useState ,useCallback,useEffect,useRef} from 'react'
 
 function App() {
   const [length, setLenght] = useState(8)
   const [numAllow, setNumAllow] = useState(false)
   const [charAllow, setCharAllow] = useState(false)
   const [password, setPassword] = useState("")
+  
+  const passwordRef=useRef(null)
 
 const passwordGen=useCallback(()=>{
   let pass=""
@@ -15,12 +17,20 @@ const passwordGen=useCallback(()=>{
 
   for (let i = 0; i <= length; i++) {
     let char= Math.floor(Math.random()*str.length+1)    
-    pass=str.charAt[char]
+    pass+=str.charAt(char)
   }
 
   setPassword(pass)
 
 },[length,numAllow,charAllow,setPassword])
+
+const passwordCopyToClipBoard=()=>{
+  passwordRef.current?.select()
+  window.navigator.clipboard.writeText(password)
+}
+
+
+  useEffect(()=>{passwordGen()},[length,numAllow,charAllow,passwordGen])
 
   return (
   <>
@@ -32,21 +42,26 @@ const passwordGen=useCallback(()=>{
       
        <input type="text" 
        placeholder='password' 
+       value={password}
        readOnly
+       ref={passwordRef}
        className='flex rounded-xl px-4 outline-none py-1 w-full' />
-       <button className='bg-green-400 rounded-xl mx-1 px-2 shrink-0 w-fit text-white outline-none'
+       <button 
+       onClick={passwordCopyToClipBoard}
+       className=' rounded-xl  mx-1 px-2 shrink-4 w-fit text-white bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 '
        >COPY</button>
 
     </div>
     <div className='flex text-sm gap-x-2'>
-      <div className='flex items-center gap-x-1'>
+      <div className='flex  items-center gap-x-1'>
      
       <input 
+      
       type="range"
       min={8}
       max={28} 
       value={length}
-      className='cursor-pointer'
+      className='cursor-pointer accent-violet-600'
       onChange={(e)=>{
         setLenght(e.target.value)
       }} />
@@ -57,6 +72,7 @@ const passwordGen=useCallback(()=>{
 
       <input 
       type="checkbox"
+      className='accent-lime-400'
       defaultValue={numAllow}
       onChange={()=>{
         setNumAllow((prev)=>!prev)
