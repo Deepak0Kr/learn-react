@@ -23,7 +23,7 @@
 		"vscode": {
 		
 			"settings": {
-				"editor.fontSize": 18,
+				"editor.fontSize": 22,
 				"terminal.integrated.fontSize": 15,
 				"editor.wordWrap": "on"
 			}
