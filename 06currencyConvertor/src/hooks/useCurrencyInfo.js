@@ -1,6 +1,6 @@
 import {useState,useEffect} from "react"
 
-function useCurrencyInfo{(currency)
+function useCurrencyInfo(currency){
     return(
         fetch(URL) 
     )
