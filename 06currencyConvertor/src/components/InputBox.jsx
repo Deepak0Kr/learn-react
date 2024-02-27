@@ -50,4 +50,4 @@ function InputBox({
     );
 }
 
-export {InputBox}
+export  {InputBox};
