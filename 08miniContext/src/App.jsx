@@ -1,5 +1,7 @@
 
 import './App.css'
+import LogIn from './components/LogIn'
+import Profile from './components/Profile'
 import { UserContextProvider } from './context/UserContextProvider'
 
 function App() {
@@ -9,6 +11,8 @@ function App() {
     <>
       <UserContextProvider>
         <h1>useContext </h1>
+         <LogIn />
+        <Profile />
       </UserContextProvider>
     </>
   )
